@@ -1,12 +1,12 @@
 # About
 
-This repository is an example of Yearn V2 Vault architecture translated into new ERC-4626 proposed standard for Vaults. Yearn Vault contract is exchanged with minimal implementation of [Rari's solmate](https://github.com/Rari-Capital/solmate) ERC-4626. Controller and Strategy contracts are left untouched. Basic DAI/Compound stategy is used because of it's simplicity. Some functions from original Yearn Vault got rewritten to operate with underlying ERC-4626, that is usually noted through NatSpec's @notice tag. Contract is neither tested nor optimized.
+This repository is an example of Yearn V2 Vault architecture translated into new ERC-4626 proposed standard for Vaults. Yearn Vault contract is exchanged with minimal implementation of [Rari's solmate](https://github.com/Rari-Capital/solmate) ERC-4626. Controller and Strategy contracts are left untouched. Basic DAI/Compound Strategy is used because of it's simplicity. Some functions from original Yearn Vault got rewritten to operate with underlying ERC-4626, that is usually noted through NatSpec's @notice tag. Contract is neither tested nor optimized.
 
 All is run against forked network with real DAI used and actual compounding from Compound. Console.log will return internal balance sheet change (interests accrued) after depositing funds into strategy and waiting some blocks for profit.
 
-This is by no means robust simulation but could be extended easily. As is, you can just verify that Yearn V2 works fine with ERC4626 through inspection of a small change in accured profits from Compound strategy. 
+This is by no means robust simulation but could be extended easily. As is, you can just verify that Yearn V2 works fine with ERC4626 through inspection of a small change in accrued profits from Compound strategy.
 
-![Vault Balanace Sheet Change](sim.png)
+![Vault Balance Sheet Change](sim.png)
 
 ### To do / Future
 
@@ -74,7 +74,7 @@ Run the Mocha tests:
 $ yarn test
 ```
 
-### Deploy contract to netowrk (requires Mnemonic and infura API key)
+### Deploy contract to network (requires Mnemonic and infura API key)
 
 ```
 npx hardhat run --network rinkeby ./scripts/deploy.ts
@@ -93,4 +93,4 @@ npx hardhat verify --network <network> <DEPLOYED_CONTRACT_ADDRESS> "Constructor 
 
 ## Thanks
 
-If you like it than you soulda put a start ⭐ on it 
+If you like it than you should put a start ⭐ on it
