@@ -35,9 +35,7 @@ contract Vault is ERC20, IERC4626 {
         governance = _governance;
     }
 
-    /*///////////////////////////////////////////////////////////////
-                        DEPOSIT/WITHDRAWAL LOGIC
-    //////////////////////////////////////////////////////////////*/
+    // DEPOSIT/WITHDRAWAL LOGIC
 
     function deposit(uint256 amount, address to) public override returns (uint256 shares) {
         require((shares = previewDeposit(amount)) != 0, "ZERO_SHARES");
@@ -108,9 +106,7 @@ contract Vault is ERC20, IERC4626 {
         asset.safeTransfer(to, amount);
     }
 
-    /*///////////////////////////////////////////////////////////////
-                         INTERNAL HOOKS LOGIC
-    //////////////////////////////////////////////////////////////*/
+    // INTERNAL HOOKS LOGIC
 
     /// @notice Example usage of hook. Pull funds from strategy to Vault if needed.
     /// Withdraw at least requested amount to the Vault. Covers withdraw/performance fees of strat. Leaves dust tokens.
@@ -121,9 +117,7 @@ contract Vault is ERC20, IERC4626 {
 
     function afterDeposit(uint256 amount) internal {}
 
-    /*///////////////////////////////////////////////////////////////
-                        ACCOUNTING LOGIC
-    //////////////////////////////////////////////////////////////*/
+    // ACCOUNTING LOGIC
 
     /// @notice Sum of idle funds and funds deployed to Strategy.
     function totalAssets() public view override returns (uint256) {
@@ -149,12 +143,12 @@ contract Vault is ERC20, IERC4626 {
         return (totalFloat * minFloat) / maxFloat;
     }
 
-    /// @notice Optional. Left empty here. (No limit) 
+    /// @notice Optional. Left empty here. (No limit)
     function maxDeposit(address) public pure override returns (uint256) {
         return type(uint256).max;
     }
 
-    /// @notice Optional. Left empty here. (No limit) 
+    /// @notice Optional. Left empty here. (No limit)
     function maxMint(address) public pure override returns (uint256) {
         return type(uint256).max;
     }
@@ -191,9 +185,7 @@ contract Vault is ERC20, IERC4626 {
         return supply == 0 ? shares : shares.mulDivDown(totalAssets(), totalSupply);
     }
 
-    /*///////////////////////////////////////////////////////////////
-                            YEARN V2 FUNCTIONS
-    //////////////////////////////////////////////////////////////*/
+    // YEARN V2 FUNCTIONS
 
     function setMin(uint256 _min) external {
         require(msg.sender == governance, "!governance");

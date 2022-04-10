@@ -3,7 +3,7 @@ pragma solidity >=0.8.0;
 
 import { ERC20 } from "@rari-capital/solmate/src/tokens/ERC20.sol";
 import { SafeTransferLib } from "@rari-capital/solmate/src/utils/SafeTransferLib.sol";
-import {FixedPointMathLib} from "./FixedPointMath.sol";
+import { FixedPointMathLib } from "./FixedPointMath.sol";
 
 /// @notice Minimal ERC4646 tokenized vault implementation.
 /// @author Solmate (https://github.com/Rari-Capital/solmate/blob/main/src/mixins/ERC4626.sol)
@@ -11,17 +11,13 @@ abstract contract ERC4626 is ERC20 {
     using SafeTransferLib for ERC20;
     using FixedPointMathLib for uint256;
 
-    /*///////////////////////////////////////////////////////////////
-                                 EVENTS
-    //////////////////////////////////////////////////////////////*/
+    // EVENTS
 
     event Deposit(address indexed from, address indexed to, uint256 amount);
 
     event Withdraw(address indexed from, address indexed to, uint256 amount);
 
-    /*///////////////////////////////////////////////////////////////
-                               IMMUTABLES
-    //////////////////////////////////////////////////////////////*/
+    // IMMUTABLES
 
     ERC20 public immutable asset;
 
@@ -33,9 +29,7 @@ abstract contract ERC4626 is ERC20 {
         asset = _asset;
     }
 
-    /*///////////////////////////////////////////////////////////////
-                        DEPOSIT/WITHDRAWAL LOGIC
-    //////////////////////////////////////////////////////////////*/
+    // DEPOSIT/WITHDRAWAL LOGIC
 
     function deposit(uint256 amount, address to) public virtual returns (uint256 shares) {
         // Check for rounding error since we round down in previewDeposit.
@@ -99,9 +93,7 @@ abstract contract ERC4626 is ERC20 {
         asset.safeTransfer(to, amount);
     }
 
-    /*///////////////////////////////////////////////////////////////
-                           ACCOUNTING LOGIC
-    //////////////////////////////////////////////////////////////*/
+    // ACCOUNTING LOGIC
 
     function totalAssets() public view virtual returns (uint256);
 
@@ -137,9 +129,7 @@ abstract contract ERC4626 is ERC20 {
         return supply == 0 ? shares : shares.mulDivDown(totalAssets(), totalSupply);
     }
 
-    /*///////////////////////////////////////////////////////////////
-                         INTERNAL HOOKS LOGIC
-    //////////////////////////////////////////////////////////////*/
+    // INTERNAL HOOKS LOGIC
 
     function beforeWithdraw(uint256 amount) internal virtual {}
 
